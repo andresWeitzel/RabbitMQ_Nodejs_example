@@ -3,7 +3,7 @@
 ![Index app](./doc/assets/CRUD_Bucket_s3.drawio.png)
 
 # RabbitMQ_Nodejs_example
-Comunicación entre publisher y consumers implementado con Nodejs, RabbitMQ, amqplib, entre otros.
+Comunicación entre publisher y consumers implementado con Nodejs, RabbitMQ, Docker, Docker Dektop, amqplib, entre otros.
 * [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDPyOkEXOR6JO-vUnYqd1FW)
 
 
@@ -71,7 +71,7 @@ Comunicación entre publisher y consumers implementado con Nodejs, RabbitMQ, amq
   <summary>Ver</summary>
   <br>
  
- 
+#### 1.1.0) Configuraciones iniciales
 * Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
 ```git
 git clone https://github.com/andresWeitzel/RabbitMQ_Nodejs_example
@@ -80,11 +80,47 @@ git clone https://github.com/andresWeitzel/RabbitMQ_Nodejs_example
 ```git
 cd 'projectName'
 ```
-* Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download)
+* Instalamos la última versión LTS de [Nodejs(v18)](https://nodejs.org/en/download).
 * Instalamos todas las librerías necesarias
 ```git
 npm i
 ```
+
+#### 1.1.1) Docker para Windows 10/11 (64 bits).
+* Descargamos e instalamos el JDK de [Java > 8.x](https://www.java.com/es/download/ie_manual.jsp) para poder implementar docker.
+* Descargamos [Docker (para windows)](https://docs.docker.com/desktop/install/windows-install/).
+* Abrimos una PS como admin y habilitamos el subsistema de linux :
+   ```cmd
+   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   ```
+* Habilitamos las funciones de la máquina virtual :
+   ```cmd
+   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+   ```
+* Descargamos el paquete de actualización del [kernel WSL2 Linux](https://learn.microsoft.com/it-it/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package).
+* Ejecutamos e instalamos dicho paquete..siguiente..siguiente.
+* Establecemos WSL 2 como la versión predeterminada para Docker :
+   ```cmd
+   wsl --set-default-version 2
+   ```
+* Por último instalamos docker:
+   * Ejecutamos el .exe "Docker Desktop Installer".
+   * Cuando se abra el .exe dejamos selecionado "Use WSL2 instead of Hyper-V".
+   * Seguidamente ok, sig., etc y esperamos que finalice la instalación.
+   * Abrir la app y comprobar el correcto funcionamiento.
+* ***IMPORTANTE*** : Es necesario reiniciar el sistema para que el mismo tome los cambios del Kernel WSL2 correctamente.
+
+#### 1.1.2) Configuración de contenedores de docker
+#### Contenedor RabbitMQ
+* Descargamos la imagen de rabbitmq desde los repositorios centrales de docker (La config de docker está como variable de entorno, podemos decargar imagenes en cualquier directorio)
+```git
+docker pull rabbitmq:3-management
+```
+* Creamos el contenedor con las configuraciones declaradas (La config de docker está como variable de entorno, podemos crear contenedores desde cualquier directorio)
+```git
+docker run --name rabbitmq --hostname my-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+```
+* Seguidamente deberíamos tener el container corriendo desde docker desktop
  
  
 <br>
@@ -98,7 +134,7 @@ npm i
   <summary>Ver</summary>
  <br>
  
-
+#### 1.2.0) Configuraciones iniciales
 * Una vez creado un entorno de trabajo a través de algún ide, clonamos el proyecto
 ```git
 git clone https://github.com/andresWeitzel/RabbitMQ_Nodejs_example
@@ -122,6 +158,43 @@ npm install --save amqplib
 node_modules
 ```
 * Creamos un direct source (src) para agregar los publishers and consumers
+
+
+#### 1.2.1) Docker para Windows 10/11 (64 bits).
+* Descargamos e instalamos el JDK de [Java > 8.x](https://www.java.com/es/download/ie_manual.jsp) para poder implementar docker.
+* Descargamos [Docker (para windows)](https://docs.docker.com/desktop/install/windows-install/).
+* Abrimos una PS como admin y habilitamos el subsistema de linux :
+   ```cmd
+   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+   ```
+* Habilitamos las funciones de la máquina virtual :
+   ```cmd
+   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+   ```
+* Descargamos el paquete de actualización del [kernel WSL2 Linux](https://learn.microsoft.com/it-it/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package).
+* Ejecutamos e instalamos dicho paquete..siguiente..siguiente.
+* Establecemos WSL 2 como la versión predeterminada para Docker :
+   ```cmd
+   wsl --set-default-version 2
+   ```
+* Por último instalamos docker:
+   * Ejecutamos el .exe "Docker Desktop Installer".
+   * Cuando se abra el .exe dejamos selecionado "Use WSL2 instead of Hyper-V".
+   * Seguidamente ok, sig., etc y esperamos que finalice la instalación.
+   * Abrir la app y comprobar el correcto funcionamiento.
+* ***IMPORTANTE*** : Es necesario reiniciar el sistema para que el mismo tome los cambios del Kernel WSL2 correctamente.
+
+#### 1.2.2) Configuración de contenedores de docker
+#### Contenedor RabbitMQ
+* Descargamos la imagen de rabbitmq desde los repositorios centrales de docker (La config de docker está como variable de entorno, podemos decargar imagenes en cualquier directorio)
+```git
+docker pull rabbitmq:3-management
+```
+* Creamos el contenedor con las configuraciones declaradas (La config de docker está como variable de entorno, podemos crear contenedores desde cualquier directorio)
+```git
+docker run --name rabbitmq --hostname my-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+```
+* Seguidamente deberíamos tener el container corriendo desde docker desktop
 
 <br>
 
@@ -201,6 +274,15 @@ node_modules
 <details>
   <summary>Ver</summary>
  <br>
+
+#### Documentación
+ * [Introducción a RabbitMQ](https://levelup.gitconnected.com/introduction-to-rabbitmq-with-nodejs-61e2aec0c52c)
+
+#### Docker rabbitmq
+* [Crear un contenedor de RabbitMQ](https://cloudinfrastructureservices.co.uk/create-rabbitmq-docker-container-image/)
+
+#### Códigos de ejemplos
+* [Demo rabbitmq nodejs](https://github.com/bervProject/rabbitmq-demo/tree/main)
 
 <br>
 
