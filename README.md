@@ -1,7 +1,5 @@
 
 
-![Index app](./doc/assets/CRUD_Bucket_s3.drawio.png)
-
 # RabbitMQ_Nodejs_example
 Comunicación entre publisher y consumers implementado con Nodejs, RabbitMQ, Docker, Docker Dektop, amqplib, entre otros.
 * [Playlist prueba de funcionalidad](https://www.youtube.com/playlist?list=PLCl11UFjHurDPyOkEXOR6JO-vUnYqd1FW)
